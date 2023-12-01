@@ -9,6 +9,8 @@ export class CalculatorComponent {
   newNumber: string = '0';
   preNumb: string = '';
   solution: string = '';
+  alreadySolution: boolean = false;
+  lastOperationEqual: boolean = false;
   firstTime: boolean = true;
   isUsingParentesis: boolean = false;
 
@@ -21,6 +23,10 @@ export class CalculatorComponent {
     }
     if (/^[0-9.+\-*/]$/.test(pressedKey)) {
       if (/^[+\-*/]$/.test(pressedKey)) {
+        if (this.alreadySolution) {
+          this.newNumber = this.solution;
+          this.alreadySolution = false;
+        }
         pressedKey = ' ' + pressedKey + ' ';
       }
       if (this.firstTime) {
@@ -40,6 +46,10 @@ export class CalculatorComponent {
   useFunction(funct: string) {
     this.preNumb = this.newNumber;
     this.newNumber += funct;
+    if (this.alreadySolution == true) {
+      this.newNumber = this.solution;
+      this.alreadySolution = false;
+    }
     if (!this.firstTime) {
       if (funct.trim() == '%') {
         this.solution = eval(this.preNumb + '/' + '100').toString();
@@ -48,8 +58,11 @@ export class CalculatorComponent {
   }
 
   calculate() {
-    if (this.newNumber != '0')
+    this.lastOperationEqual = true;
+    if (this.newNumber != '0') {
       this.solution = eval(this.newNumber).toString().substring(0, 14);
+      this.alreadySolution = true;
+    }
   }
 
   clearDisplay() {
@@ -57,6 +70,7 @@ export class CalculatorComponent {
     this.solution = '';
     this.firstTime = true;
     this.preNumb = '';
+    this.alreadySolution = false;
   }
 
   groupNumber() {
