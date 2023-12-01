@@ -8,9 +8,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class NumbersComponent {
   @Output() numberPressed = new EventEmitter<string>();
 
-  del1al9: Array<Number> = [7, 8, 9, 4, 5, 6, 1, 2, 3];
+  del1al9: Array<string> = ['7', '8', '9', '4', '5', '6', '1', '2', '3'];
 
-  sendNumberToParent(numero: Number) {
-    this.numberPressed.emit(numero.toString());
+  sendNumberToParent(numero: string) {
+    this.numberPressed.emit(numero);
   }
 }
