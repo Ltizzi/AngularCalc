@@ -3,6 +3,7 @@
     <li
       *ngFor="let number of del1al9"
       class="rounded-xl bg-sky-600 text-white text-center py-5 shadow-lg shadow-gray-400"
+      (click)="sendNumberToParent(number)"
     >
       {{ number }}
     </li>

@@ -6,6 +6,7 @@ import { NumbersComponent } from './components/ui/numbers/numbers.component';
 import { TopComponent } from './components/ui/top/top.component';
 import { RightComponent } from './components/ui/right/right.component';
 import { DisplayComponent } from './components/ui/display/display.component';
+import { CalculatorComponent } from './components/calculator/calculator.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { DisplayComponent } from './components/ui/display/display.component';
     TopComponent,
     RightComponent,
     DisplayComponent,
+    CalculatorComponent,
   ],
   imports: [BrowserModule],
   providers: [],
