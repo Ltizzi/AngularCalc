@@ -48,6 +48,7 @@ export class CalculatorComponent {
     this.newNumber = this.newNumber.slice(0, -1);
     if (this.newNumber.length == 0) {
       this.newNumber = '0';
+      this.firstTime = true;
     }
   }
 }
