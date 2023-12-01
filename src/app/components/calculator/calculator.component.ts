@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-calculator',
@@ -7,8 +7,28 @@ import { Component } from '@angular/core';
 })
 export class CalculatorComponent {
   newNumber: string = '0';
+  preNumb: string = '';
+  solution: string = '';
   firstTime: boolean = true;
   isUsingParentesis: boolean = false;
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent): void {
+    let pressedKey = event.key;
+    console.log(pressedKey);
+    if (pressedKey.toString() == 'Enter') {
+      this.calculate();
+    }
+    if (/^[0-9.+\-*/]$/.test(pressedKey)) {
+      if (/^[+\-*/]$/.test(pressedKey)) {
+        pressedKey = ' ' + pressedKey + ' ';
+      }
+      if (this.firstTime) {
+        this.firstTime = false;
+        this.newNumber = pressedKey;
+      } else this.newNumber += pressedKey;
+    } else event.preventDefault();
+  }
 
   numberClicked(num: string) {
     if (this.firstTime) {
@@ -18,16 +38,25 @@ export class CalculatorComponent {
   }
 
   useFunction(funct: string) {
+    this.preNumb = this.newNumber;
+    this.newNumber += funct;
     if (!this.firstTime) {
-      this.newNumber += funct;
+      if (funct.trim() == '%') {
+        this.solution = eval(this.preNumb + '/' + '100').toString();
+      } else this.solution = eval(this.newNumber).toString().substring(0, 15);
     }
   }
 
-  calculate() {}
+  calculate() {
+    if (this.newNumber != '0')
+      this.solution = eval(this.newNumber).toString().substring(0, 14);
+  }
 
   clearDisplay() {
     this.newNumber = '0';
+    this.solution = '';
     this.firstTime = true;
+    this.preNumb = '';
   }
 
   groupNumber() {

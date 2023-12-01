@@ -2,7 +2,10 @@
   <div
     class="flex flex-col gap-4 justify-center mx-auto w-1/4 bg-sky-950 py-5 px-5 rounded-xl shadow-2xl shadow-yellow-950"
   >
-    <app-display [numberFromParent]="newNumber"></app-display>
+    <app-display
+      [numberFromParent]="newNumber"
+      [solutionFromParent]="solution"
+    ></app-display>
     <app-top
       class="w-full"
       (displayCleared)="clearDisplay()"

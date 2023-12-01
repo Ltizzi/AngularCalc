@@ -8,4 +8,6 @@ import { Component, Input } from '@angular/core';
 export class DisplayComponent {
   @Input()
   numberFromParent!: string;
+
+  @Input() solutionFromParent!: string;
 }
