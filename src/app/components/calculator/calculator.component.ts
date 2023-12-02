@@ -21,6 +21,9 @@ export class CalculatorComponent {
     if (pressedKey.toString() == 'Enter') {
       this.calculate();
     }
+    if (pressedKey.toString() == 'Backspace') {
+      this.deleteLast();
+    }
     if (/^[0-9.+\-*/]$/.test(pressedKey)) {
       if (/^[+\-*/]$/.test(pressedKey)) {
         if (this.alreadySolution) {
@@ -33,7 +36,8 @@ export class CalculatorComponent {
         this.firstTime = false;
         this.newNumber = pressedKey;
       } else this.newNumber += pressedKey;
-    } else event.preventDefault();
+    }
+    // else event.preventDefault();
   }
 
   numberClicked(num: string) {
@@ -53,7 +57,7 @@ export class CalculatorComponent {
     if (!this.firstTime) {
       if (funct.trim() == '%') {
         this.solution = eval(this.preNumb + '/' + '100').toString();
-      } else this.solution = eval(this.newNumber).toString().substring(0, 15);
+      } else this.solution = eval(this.newNumber).toString().substring(0, 14);
     }
   }
 
